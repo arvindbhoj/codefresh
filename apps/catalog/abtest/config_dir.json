@@ -1,0 +1,16 @@
+{
+  "appName": "catalog",
+  "userGivenName": "catalog",
+  "destNamespace": "abtest",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "./services/elasticsearch/2.0.0",
+  "srcRepoURL": "https://github.com/arvindbhoj/kommander-catalog.git",
+  "srcTargetRevision": "master",
+  "labels": {
+    "codefresh_io_entity": "git-source",
+    "codefresh_io_internal": "false"
+  },
+  "annotations": null,
+  "exclude": "",
+  "include": ""
+}
