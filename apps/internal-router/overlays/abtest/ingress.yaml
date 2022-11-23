@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: abtest-internal-router-ingress
   namespace: abtest
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: kommander-traefik
   rules:
