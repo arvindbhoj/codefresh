@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: abtest
 resources:
 - ../../base
+- ingress.yaml
