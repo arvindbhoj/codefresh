@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: abcodefresh-internal-router-ingress
   namespace: abcodefresh
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"  
 spec:
   ingressClassName: kommander-traefik
   rules:
