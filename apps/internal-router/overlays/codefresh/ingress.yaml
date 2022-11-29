@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: '"true'
+  name: codefresh-internal-router-ingress
+  namespace: codefresh
+spec:
+  ingressClassName: kommander-traefik
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /webhooks
+        pathType: Prefix
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /workflows
+        pathType: Prefix
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /app-proxy
+        pathType: Prefix
