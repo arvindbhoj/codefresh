@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.tls: 'true'
+    abc: def
   name: codefresh-internal-router-ingress
   namespace: codefresh
 spec:
