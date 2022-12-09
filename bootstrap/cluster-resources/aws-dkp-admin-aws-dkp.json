@@ -1,0 +1,4 @@
+{
+  "name": "aws-dkp-admin-aws-dkp",
+  "server": "https://aws-dkp-apiserver-1717167348.us-west-2.elb.amazonaws.com:6443"
+}
