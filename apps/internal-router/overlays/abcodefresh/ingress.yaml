@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  name: abcodefresh-internal-router-ingress
+  namespace: abcodefresh
+spec:
+  ingressClassName: kommander-traefik
+  rules:
+  - host: fleetmanager.dkpdemo.org
+    http:
+      paths:
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /webhooks
+        pathType: Prefix
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /workflows
+        pathType: Prefix
+      - backend:
+          service:
+            name: internal-router
+            port:
+              number: 80
+        path: /app-proxy
+        pathType: Prefix
