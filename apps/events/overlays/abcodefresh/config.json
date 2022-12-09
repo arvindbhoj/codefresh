@@ -1,0 +1,16 @@
+{
+  "appName": "events",
+  "userGivenName": "events",
+  "destNamespace": "abcodefresh",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/events/overlays/abcodefresh",
+  "srcRepoURL": "https://github.com/arvindbhoj/codefresh.git",
+  "srcTargetRevision": "",
+  "labels": {
+    "codefresh_io_entity": "component",
+    "codefresh_io_internal": "true"
+  },
+  "annotations": {
+    "argocd_argoproj_io_sync-wave": "0"
+  }
+}
