@@ -1,0 +1,97 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd-autopilot.argoproj-labs.io/default-dest-server: https://144.217.53.168:6443
+    argocd.argoproj.io/sync-options: PruneLast=true
+    argocd.argoproj.io/sync-wave: "-2"
+  creationTimestamp: null
+  name: dkp-demo-admin-dkp-demo
+  namespace: abcodefresh
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: dkp-demo-admin-dkp-demo project
+  destinations:
+  - namespace: '*'
+    server: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  sourceRepos:
+  - '*'
+status: {}
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  creationTimestamp: null
+  name: dkp-demo-admin-dkp-demo
+  namespace: abcodefresh
+spec:
+  generators:
+  - git:
+      files:
+      - path: apps/**/dkp-demo-admin-dkp-demo/config.json
+      repoURL: https://github.com/arvindbhoj/codefresh.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
+            repoURL: ""
+  - git:
+      files:
+      - path: apps/**/dkp-demo-admin-dkp-demo/config_dir.json
+      repoURL: https://github.com/arvindbhoj/codefresh.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
+            directory:
+              exclude: '{{ exclude }}'
+              include: '{{ include }}'
+              jsonnet: {}
+              recurse: true
+            repoURL: ""
+  syncPolicy: {}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: argocd-autopilot
+        app.kubernetes.io/name: '{{ appName }}'
+        codefresh.io/entity: '{{ labels.codefresh_io_entity }}'
+        codefresh.io/internal: '{{ labels.codefresh_io_internal }}'
+      name: dkp-demo-admin-dkp-demo-{{ userGivenName }}
+      namespace: abcodefresh
+    spec:
+      destination:
+        namespace: '{{ destNamespace }}'
+        server: '{{ destServer }}'
+      ignoreDifferences:
+      - group: argoproj.io
+        jsonPointers:
+        - /status
+        kind: Application
+      project: dkp-demo-admin-dkp-demo
+      source:
+        path: '{{ srcPath }}'
+        repoURL: '{{ srcRepoURL }}'
+        targetRevision: '{{ srcTargetRevision }}'
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+status: {}
